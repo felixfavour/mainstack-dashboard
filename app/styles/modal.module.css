@@ -115,11 +115,12 @@
 /* CUSTOM SELECT */
 .custom_select__ctn {
   position: relative;
+  background: #ffffff;
 }
 .custom_select__ctn .select__bar {
   border-radius: 12px;
-  border: 3px solid var(--dark);
-  background: #fff;
+  background: var(--grey);
+  border: 3px solid var(--grey);
   height: 50px;
   width: 100%;
   padding: 0 1rem;
@@ -128,6 +129,11 @@
   justify-content: space-between;
   gap: 1rem;
   cursor: pointer;
+}
+.custom_select__ctn .select__bar:focus,
+.custom_select__ctn:focus-within .select__bar {
+  border-color: var(--dark);
+  background: #ffffff;
 }
 .select__bar span {
   font-size: 0.875rem;
@@ -222,4 +228,51 @@
 }
 .option__active .empty__check path {
   fill: white;
+}
+
+/* CUSTOM DATE PIKCER */
+.custom__date_picker {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+}
+
+.custom_select__ctn .select__bar:focus + .datepicker__popper,
+.custom_select__ctn .datepicker__popper:hover {
+  opacity: 1;
+  transform: scale(1);
+  visibility: visible;
+  -webkit-transform: scale(1);
+  -moz-transform: scale(1);
+  -ms-transform: scale(1);
+  -o-transform: scale(1);
+}
+.prev,
+.next {
+  height: 36px;
+  width: 36px;
+  min-width: 36px;
+  transform: rotate(90deg);
+  border-radius: 50%;
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  -ms-border-radius: 50%;
+  -o-border-radius: 50%;
+  -webkit-transform: rotate(90deg);
+  -moz-transform: rotate(90deg);
+  -ms-transform: rotate(90deg);
+  -o-transform: rotate(90deg);
+  display: grid;
+  place-items: center;
+}
+.prev:hover,
+.next:hover {
+  background: var(--grey);
+}
+.next {
+  transform: rotate(-90deg);
+  -webkit-transform: rotate(-90deg);
+  -moz-transform: rotate(-90deg);
+  -ms-transform: rotate(-90deg);
+  -o-transform: rotate(-90deg);
 }

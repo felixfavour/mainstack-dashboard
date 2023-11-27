@@ -16,7 +16,7 @@ interface Props {
 
 export default function CustomSelect({ label, value, options, onChange }: Props) {
   return (
-    <div className={styles.custom_select__ctn}>
+    <div className={styles.custom_select__ctn} onSubmit={(e) => e.preventDefault()}>
       <button className={styles.select__bar}>
         <span>{value?.toString()?.replaceAll(',', ', ') || label}</span>
         <ChevronDownIcon />

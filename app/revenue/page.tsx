@@ -1,5 +1,5 @@
 "use client"
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import BalanceChart from '../components/BalanceChart'
 import EmptyState from '../components/EmptyState'
 import FilterModal from '../components/FilterModal'
@@ -8,44 +8,43 @@ import ExportIcon from '../components/Icons/Export'
 import MetricCard from '../components/MetricCard'
 import TransactionTableRow from '../components/TransactionTableRow'
 import styles from '../styles/page.module.css'
+import { formatAmount, formatDate } from '../utils/functions'
 
 export default function RevenuePage() {
   const [modalOpen, setModalOpen] = useState(false)
+  const [wallet, setWallet] = useState({})
+  const [isLoading, setIsLoading] = useState(false)
+  const [transactions, setTransactions] = useState([])
+  const [filteredTransactions, setFilteredTransactions] = useState([])
+  const baseURL = 'https://fe-task-api.mainstack.io'
 
-  const transactions = [
-    {
-      id: 1,
-      outgoing: false,
-      description: 'Psychology of Money',
-      status: 'Roy Cash',
-      amount: 'USD 600',
-      date: 'Apr 03, 2022'
-    },
-    {
-      id: 2,
-      outgoing: true,
-      description: 'Cash withdrawal',
-      status: 'successful',
-      amount: 'USD 3,000.33',
-      date: 'Apr 03, 2022'
-    },
-    {
-      id: 3,
-      outgoing: true,
-      description: 'Cash withdrawal',
-      status: 'pending',
-      amount: 'USD 1,004.44',
-      date: 'Apr 03, 2022'
-    },
-    {
-      id: 4,
-      outgoing: false,
-      description: 'Psychology of Money',
-      status: 'Roy Cash',
-      amount: 'USD 600',
-      date: 'Apr 03, 2022'
-    },
-  ]
+  const getWallet = async () => {
+    try {
+      const response = await fetch(`${baseURL}/wallet`)
+      const wallet = await response.json()
+      setWallet(wallet)
+    } catch (err) {
+      console.log('err', err)
+    }
+  }
+
+  const getTransactions = async () => {
+    try {
+      const response = await fetch(`${baseURL}/transactions`)
+      const transactions = await response.json()
+      setTransactions(transactions)
+      setFilteredTransactions(transactions)
+    } catch (err) {
+      console.log('err', err)
+    }
+  }
+
+  useEffect(() => {
+    setIsLoading(true)
+    Promise.all([getWallet(), getTransactions()]).then((value) => {
+      setIsLoading(false)
+    })
+  }, [])
 
   return (
     <section className={styles.section}>
@@ -56,7 +55,7 @@ export default function RevenuePage() {
             <div className={styles.avail__bal}>
               <div>
                 <p>Available Balance</p>
-                <h2>USD 120,500.00</h2>
+                <h2>{formatAmount(wallet?.balance)}</h2>
               </div>
               <div>
                 <button className="primary-btn">
@@ -68,17 +67,17 @@ export default function RevenuePage() {
             <BalanceChart />
           </div>
           <div className={styles.rhs}>
-            <MetricCard label="Ledger Balance" value="USD 0.00" info="This is the available ledger balance" />
-            <MetricCard label="Total Payout" value="USD 55,080.00" info="This is the total payout" />
-            <MetricCard label="Total Revenue" value="USD 175,580.00" info="This is the total revenue" />
-            <MetricCard label="Pending Payout" value="USD 0.00" info="This is the Pending Payout" />
+            <MetricCard label="Ledger Balance" value={formatAmount(wallet?.ledger_balance)} info="This is the available ledger balance" />
+            <MetricCard label="Total Payout" value={formatAmount(wallet?.total_payout)} info="This is the total payout" />
+            <MetricCard label="Total Revenue" value={formatAmount(wallet?.total_revenue)} info="This is the total revenue" />
+            <MetricCard label="Pending Payout" value={formatAmount(wallet?.pending_payout)} info="This is the Pending Payout" />
           </div>
         </div>
 
         <div className={styles.row_two__revenue}>
           <div className={styles.header}>
             <div>
-              <h3>24 Transactions</h3>
+              <h3>{filteredTransactions?.length} Transactions</h3>
               <p>Your transactions for the last 7 days</p>
             </div>
             <div className={styles.actions}>
@@ -97,16 +96,16 @@ export default function RevenuePage() {
           {/* TRANSACTIONS TABLE */}
           <div className={styles.transaction__table}>
             {/* EMPTY STATE */}
-            <EmptyState />
+            {filteredTransactions?.length === 0 && !isLoading && <EmptyState />}
 
             {/* MAIN TABLE */}
-            {transactions.map(transaction => <TransactionTableRow
-              key={transaction.id}
-              description={transaction.description}
-              outgoing={transaction.outgoing}
-              status={transaction.status}
-              amount={transaction.amount}
-              date={transaction.date} />)}
+            {filteredTransactions?.map(transaction => <TransactionTableRow
+              key={transaction.payment_reference}
+              description={transaction.metadata?.product_name || transaction.metadata?.type || 'Cash Withdrawal'}
+              outgoing={transaction.type?.toLowerCase() !== 'deposit'}
+              status={transaction.metadata?.product_name ? transaction.metadata?.name : transaction.status}
+              amount={formatAmount(transaction.amount)}
+              date={formatDate(transaction.date)} />)}
           </div>
         </div>
       </div>

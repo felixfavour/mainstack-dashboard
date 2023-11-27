@@ -2,6 +2,8 @@
 
 import { Dispatch, SetStateAction, useState } from 'react'
 import styles from '../styles/modal.module.css'
+import CustomDoubleDateRange from './CustomDoubleDateRange'
+import CustomDateRange from './CustomDoubleDateRange'
 import CustomSelect from './CustomSelect'
 import CloseIcon from './Icons/Close'
 
@@ -14,6 +16,8 @@ export default function FilterModal({ modalOpen, setModalOpen }: Props) {
   const [closingModal, setClosingModal] = useState(false)
   const [transactionStatus, setTransactionStatus] = useState<Array<string>>([])
   const [transactionType, setTransactionType] = useState<Array<string>>([])
+  const [fromDate, setFromDate] = useState('')
+  const [toDate, setToDate] = useState('')
 
   const delayClose = (milli: number) => {
     setClosingModal(true)
@@ -71,6 +75,10 @@ export default function FilterModal({ modalOpen, setModalOpen }: Props) {
           <form onSubmit={(e) => e.preventDefault()}>
             <div className={styles.form__input}>
               <label>Date Range</label>
+              <CustomDoubleDateRange
+                fromValue={fromDate}
+                toValue={toDate}
+                onChange={(type, date) => { type === 'FROM' ? setFromDate(date) : setToDate(date) }} />
             </div>
             <div className={styles.form__input}>
               <label>Transaction Type</label>
