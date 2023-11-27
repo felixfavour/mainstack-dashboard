@@ -2,6 +2,7 @@
 
 import { Dispatch, SetStateAction, useState } from 'react'
 import styles from '../styles/modal.module.css'
+import CustomSelect from './CustomSelect'
 import CloseIcon from './Icons/Close'
 
 interface Props {
@@ -11,6 +12,8 @@ interface Props {
 
 export default function FilterModal({ modalOpen, setModalOpen }: Props) {
   const [closingModal, setClosingModal] = useState(false)
+  const [transactionStatus, setTransactionStatus] = useState<Array<string>>([])
+  const [transactionType, setTransactionType] = useState<Array<string>>([])
 
   const delayClose = (milli: number) => {
     setClosingModal(true)
@@ -18,6 +21,26 @@ export default function FilterModal({ modalOpen, setModalOpen }: Props) {
       setClosingModal(false)
       setModalOpen(false)
     }, milli)
+  }
+
+  const modifyArray = (arrayName: string, item: string) => {
+    if (arrayName === 'transactionStatus') {
+      let temp = [...transactionStatus]
+      if (temp.includes(item)) {
+        temp = temp.filter(tempItem => tempItem !== item)
+      } else {
+        temp.push(item)
+      }
+      setTransactionStatus(temp)
+    } else {
+      let temp = [...transactionType]
+      if (temp.includes(item)) {
+        temp = temp.filter(tempItem => tempItem !== item)
+      } else {
+        temp.push(item)
+      }
+      setTransactionType(temp)
+    }
   }
 
   return (
@@ -45,15 +68,25 @@ export default function FilterModal({ modalOpen, setModalOpen }: Props) {
               Last 3 months
             </button>
           </div>
-          <form>
+          <form onSubmit={(e) => e.preventDefault()}>
             <div className={styles.form__input}>
               <label>Date Range</label>
             </div>
             <div className={styles.form__input}>
               <label>Transaction Type</label>
+              <CustomSelect
+                label="Select Transaction Type"
+                value={transactionType}
+                options={['Store Transactions', 'Get Tipped', 'Withdrawals', 'Chargebacks', 'Cashbacks', 'Refer & Earn']}
+                onChange={(option) => modifyArray('transactionType', option)} />
             </div>
             <div className={styles.form__input}>
               <label>Transaction Status</label>
+              <CustomSelect
+                label="Select Transaction Status"
+                value={transactionStatus}
+                options={['successful', 'pending', 'failed']}
+                onChange={(option) => modifyArray('transactionStatus', option)} />
             </div>
           </form>
           <div className={styles.bottom__actions}>

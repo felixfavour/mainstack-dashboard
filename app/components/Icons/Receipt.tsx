@@ -10,12 +10,12 @@ const ReceiptIcon = () => (
     </g>
     <defs>
       <linearGradient id="paint0_linear_4386_630" x1="1.5" y1="0.314453" x2="48" y2="46.8145" gradientUnits="userSpaceOnUse">
-        <stop stop-color="#DBDEE6" />
-        <stop offset="1" stop-color="#F6F7F9" />
+        <stop stopColor="#DBDEE6" />
+        <stop offset="1" stopColor="#F6F7F9" />
       </linearGradient>
       <linearGradient id="paint1_linear_4386_630" x1="16.8" y1="15.375" x2="32.2687" y2="31.5158" gradientUnits="userSpaceOnUse">
-        <stop stop-color="#5C6670" />
-        <stop offset="1" stop-color="#131316" />
+        <stop stopColor="#5C6670" />
+        <stop offset="1" stopColor="#131316" />
       </linearGradient>
     </defs>
   </svg>)
