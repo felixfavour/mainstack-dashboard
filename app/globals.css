@@ -1,6 +1,39 @@
 :root {
   --grey: #eff1f6;
-  --light-grey: #f6f9ff;
+  --light-grey: #eff1f680;
+  --grey-text: #56616b;
+  --dark: #131316;
+  --desktop-width: 1100px;
+}
+
+@font-face {
+  font-family: "Degular Display";
+  src: url("./assets/fonts/Degular-Medium.woff2");
+  src: url("./assets/fonts/Degular-Medium.woff2") format("embedded-opentype"),
+    url("./assets/fonts/Degular-Medium.woff2") format("truetype");
+  font-weight: 500;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Degular Display";
+  src: url("./assets/fonts/Degular-Semibold.woff2");
+  src: url("./assets/fonts/Degular-Semibold.woff2") format("embedded-opentype"),
+    url("./assets/fonts/Degular-Semibold.woff2") format("truetype");
+  font-weight: 600;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Degular Display";
+  src: url("./assets/fonts/Degular_Display-Bold.woff2");
+  src: url("./assets/fonts/Degular_Display-Bold.woff2")
+      format("embedded-opentype"),
+    url("./assets/fonts/Degular_Display-Bold.woff2") format("truetype");
+  font-weight: 700;
+  font-display: swap;
+}
+
+* {
+  font-family: "Degular Display", "Inter", sans-serif;
 }
 
 body {
@@ -12,13 +45,60 @@ main {
   width: 100%;
 }
 
+path {
+  /* transition: 0.1s;
+  -webkit-transition: 0.1s;
+  -moz-transition: 0.1s;
+  -ms-transition: 0.1s;
+  -o-transition: 0.1s; */
+}
+
 .primary-btn {
-  height: 40px;
+  height: 50px;
   border-radius: 100px;
   -webkit-border-radius: 100px;
   -moz-border-radius: 100px;
   -ms-border-radius: 100px;
   -o-border-radius: 100px;
+  background: var(--dark);
+  color: var(--grey);
+  font-size: 1rem;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.secondary-btn {
+  height: 50px;
+  border-radius: 100px;
+  -webkit-border-radius: 100px;
+  -moz-border-radius: 100px;
+  -ms-border-radius: 100px;
+  -o-border-radius: 100px;
+  background: var(--grey);
+  color: var(--dark);
+  font-size: 1rem;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  padding: 0 1.5rem;
+  transition: 0.2s;
+  -webkit-transition: 0.2s;
+  -moz-transition: 0.2s;
+  -ms-transition: 0.2s;
+  -o-transition: 0.2s;
+}
+
+.secondary-btn:hover {
+  color: var(--grey);
+  background: var(--dark);
+}
+.secondary-btn:hover path {
+  fill: var(--grey);
 }
 
 ul {
