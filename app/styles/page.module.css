@@ -96,6 +96,24 @@
   display: flex;
   gap: 1rem;
 }
+.actions .count {
+  background: var(--dark);
+  color: var(--grey);
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  width: 20px;
+  min-width: 20px;
+  height: 20px;
+  border-radius: 10px;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  -ms-border-radius: 10px;
+  -o-border-radius: 10px;
+  font-size: 0.75rem;
+  line-height: 0;
+  border: 1px solid var(--grey);
+}
 
 .table_row__transaction {
   display: flex;
@@ -115,4 +133,25 @@
 .table_row__transaction .rhs p {
   font-size: 0.875rem;
   color: var(--grey-text);
+}
+
+.empty__state {
+  max-width: 370px;
+  width: 100%;
+  text-align: left;
+  margin: 5% auto;
+}
+.empty__state h3 {
+  color: var(--dark);
+  font-size: 1.8rem;
+  font-weight: 700;
+  line-height: 2.3rem;
+  letter-spacing: -0.5px;
+  margin-bottom: 1rem;
+  margin-top: 1.3rem;
+}
+.empty__state p {
+  color: var(--grey-text);
+  margin-bottom: 2rem;
+  line-height: 1.5rem;
 }

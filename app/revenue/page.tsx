@@ -1,5 +1,8 @@
 "use client"
+import { useState } from 'react'
 import BalanceChart from '../components/BalanceChart'
+import EmptyState from '../components/EmptyState'
+import FilterModal from '../components/FilterModal'
 import ChevronDownIcon from '../components/Icons/ChevronDown'
 import ExportIcon from '../components/Icons/Export'
 import MetricCard from '../components/MetricCard'
@@ -7,6 +10,7 @@ import TransactionTableRow from '../components/TransactionTableRow'
 import styles from '../styles/page.module.css'
 
 export default function RevenuePage() {
+  const [modalOpen, setModalOpen] = useState(false)
 
   const transactions = [
     {
@@ -79,8 +83,8 @@ export default function RevenuePage() {
             </div>
             <div className={styles.actions}>
               <div>
-                <button className="secondary-btn">
-                  Filter <ChevronDownIcon />
+                <button className="secondary-btn" onClick={() => setModalOpen(true)}>
+                  Filter <span className={styles.count}>3</span> <ChevronDownIcon />
                 </button>
               </div>
               <div>
@@ -91,15 +95,22 @@ export default function RevenuePage() {
             </div>
           </div>
           {/* TRANSACTIONS TABLE */}
-          {transactions.map(transaction => <TransactionTableRow
-            key={transaction.id}
-            description={transaction.description}
-            outgoing={transaction.outgoing}
-            status={transaction.status}
-            amount={transaction.amount}
-            date={transaction.date} />)}
+          <div className={styles.transaction__table}>
+            {/* EMPTY STATE */}
+            <EmptyState />
+
+            {/* MAIN TABLE */}
+            {transactions.map(transaction => <TransactionTableRow
+              key={transaction.id}
+              description={transaction.description}
+              outgoing={transaction.outgoing}
+              status={transaction.status}
+              amount={transaction.amount}
+              date={transaction.date} />)}
+          </div>
         </div>
       </div>
+      <FilterModal modalOpen={modalOpen} setModalOpen={setModalOpen} />
     </section>
   )
 }
