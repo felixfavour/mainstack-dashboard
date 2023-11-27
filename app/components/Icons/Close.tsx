@@ -1,6 +1,6 @@
 const CloseIcon = () => (
   <svg width="34" height="34" viewBox="0 0 34 34" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <mask id="mask0_4386_933" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="4" y="4" width="24" height="24">
+    <mask id="mask0_4386_933" style={{ maskType: 'alpha' }} maskUnits="userSpaceOnUse" x="4" y="4" width="24" height="24">
       <rect x="4" y="4" width="24" height="24" fill="#C4C4C4" />
     </mask>
     <g mask="url(#mask0_4386_933)">
