@@ -15,7 +15,9 @@ export default function RevenuePage() {
   const [wallet, setWallet] = useState({})
   const [isLoading, setIsLoading] = useState(false)
   const [transactions, setTransactions] = useState([])
+  const [activeFilters, setActiveFilters] = useState(0)
   const [filteredTransactions, setFilteredTransactions] = useState([])
+  const [filters, setFilters] = useState<any>({})
   const baseURL = 'https://fe-task-api.mainstack.io'
 
   const getWallet = async () => {
@@ -45,6 +47,10 @@ export default function RevenuePage() {
       setIsLoading(false)
     })
   }, [])
+
+  useEffect(() => {
+    setActiveFilters(Object.values(filters)?.filter(val => val?.toString()).length)
+  }, [filters])
 
   return (
     <section className={styles.section}>
@@ -83,7 +89,7 @@ export default function RevenuePage() {
             <div className={styles.actions}>
               <div>
                 <button className="secondary-btn" onClick={() => setModalOpen(true)}>
-                  Filter <span className={styles.count}>3</span> <ChevronDownIcon />
+                  Filter {activeFilters > 0 && <span className={styles.count}>{activeFilters}</span>} <ChevronDownIcon />
                 </button>
               </div>
               <div>
@@ -109,7 +115,7 @@ export default function RevenuePage() {
           </div>
         </div>
       </div>
-      <FilterModal modalOpen={modalOpen} setModalOpen={setModalOpen} />
+      <FilterModal modalOpen={modalOpen} setModalOpen={setModalOpen} setFilters={setFilters} />
     </section>
   )
 }

@@ -9,10 +9,11 @@ import CloseIcon from './Icons/Close'
 
 interface Props {
   modalOpen: boolean,
+  setFilters: Dispatch<SetStateAction<any>>,
   setModalOpen: Dispatch<SetStateAction<boolean>>
 }
 
-export default function FilterModal({ modalOpen, setModalOpen }: Props) {
+export default function FilterModal({ modalOpen, setModalOpen, setFilters }: Props) {
   const [closingModal, setClosingModal] = useState(false)
   const [transactionStatus, setTransactionStatus] = useState<Array<string>>([])
   const [transactionType, setTransactionType] = useState<Array<string>>([])
@@ -25,6 +26,25 @@ export default function FilterModal({ modalOpen, setModalOpen }: Props) {
       setClosingModal(false)
       setModalOpen(false)
     }, milli)
+  }
+
+  const applyFilters = () => {
+    setFilters({
+      fromDate,
+      toDate,
+      transactionStatus,
+      transactionType
+    })
+    delayClose(600)
+  }
+
+  const clearFilters = () => {
+    setToDate('')
+    setFromDate('')
+    setTransactionStatus([])
+    setTransactionType([])
+    setFilters({})
+    delayClose(600)
   }
 
   const modifyArray = (arrayName: string, item: string) => {
@@ -98,10 +118,15 @@ export default function FilterModal({ modalOpen, setModalOpen }: Props) {
             </div>
           </form>
           <div className={styles.bottom__actions}>
-            <button className='primary-btn outline'>
+            <button
+              className='primary-btn outline'
+              onClick={() => clearFilters()}>
               Clear
             </button>
-            <button className='primary-btn'>
+            <button
+              className='primary-btn'
+              disabled={!(transactionType.toString() || transactionStatus.toString() || toDate || fromDate)}
+              onClick={() => applyFilters()}>
               Apply
             </button>
           </div>

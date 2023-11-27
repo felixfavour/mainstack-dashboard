@@ -61,6 +61,12 @@ button {
   -o-transition: 0.2s;
 }
 
+button:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
 .primary-btn {
   height: 50px;
   border-radius: 100px;
