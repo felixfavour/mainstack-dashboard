@@ -33,7 +33,7 @@ const AppBar = () => {
     <div className={styles.appbar__ctn}>
       <ul className={styles.appbar__actions}>
         {navItems?.map(navItem => <li key={navItem.name}>
-          <Tooltip hasArrow center label={navItem.name} placement="right-end" borderRadius={8}>
+          <Tooltip hasArrow top={-1} right={-3} label={navItem.name} placement="right-end" borderRadius={8} background="#131316">
             <Link href="#">
               {navItem.icon}
             </Link>

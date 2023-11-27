@@ -1,0 +1,118 @@
+.section {
+  padding: 150px 0;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.section > .inner {
+  width: 100%;
+  max-width: var(--desktop-width);
+  margin: auto;
+}
+
+/* REVENUE PAGE */
+.row_one__revenue {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.avail__bal {
+  display: flex;
+  align-items: center;
+  gap: 5rem;
+  margin-bottom: 2rem;
+}
+.avail__bal p {
+  letter-spacing: -0.2px;
+  color: var(--grey-text);
+  font-size: 0.875rem;
+}
+.avail__bal h2 {
+  color: var(--dark);
+  font-size: 2.2rem;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 3.5rem;
+  letter-spacing: -0.5px;
+}
+.avail__bal button {
+  width: 170px;
+}
+.row_one__revenue .lhs {
+  flex-basis: 60%;
+}
+.row_one__revenue .rhs {
+  flex-basis: 30%;
+  padding-top: 1rem;
+}
+
+.metric__card {
+  display: flex;
+  justify-content: space-between;
+  gap: 3rem;
+  margin-bottom: 3rem;
+}
+.metric__card p {
+  letter-spacing: -0.2px;
+  color: var(--grey-text);
+  font-size: 0.875rem;
+}
+.metric__card h3 {
+  color: var(--dark);
+  font-size: 1.8rem;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 3rem;
+  letter-spacing: -0.5px;
+}
+
+.row_two__revenue {
+  padding-top: 2rem;
+}
+.row_two__revenue .header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid var(--grey);
+  padding-bottom: 1.5rem;
+  margin-bottom: 2rem;
+}
+.row_two__revenue .header p {
+  letter-spacing: -0.2px;
+  color: var(--grey-text);
+  font-size: 0.875rem;
+}
+.row_two__revenue .header h3 {
+  color: var(--dark);
+  font-size: 1.5rem;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 2rem;
+  letter-spacing: -0.5px;
+}
+.header .actions {
+  display: flex;
+  gap: 1rem;
+}
+
+.table_row__transaction {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 1.5rem;
+}
+.table_row__transaction .lhs {
+  display: flex;
+  gap: 1rem;
+}
+.table_row__transaction .rhs {
+  text-align: right;
+}
+.table_row__transaction .rhs h5 {
+  font-weight: 700;
+}
+.table_row__transaction .rhs p {
+  font-size: 0.875rem;
+  color: var(--grey-text);
+}

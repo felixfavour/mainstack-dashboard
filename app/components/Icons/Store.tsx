@@ -7,16 +7,16 @@ const StoreIcon = () => (
     </g>
     <defs>
       <linearGradient id="paint0_linear_4386_1452" x1="12.3418" y1="22.4112" x2="27.6375" y2="22.4112" gradientUnits="userSpaceOnUse">
-        <stop stop-color="#FF9868" />
-        <stop offset="1" stop-color="#FF5403" />
+        <stop stopColor="#FF9868" />
+        <stop offset="1" stopColor="#FF5403" />
       </linearGradient>
       <linearGradient id="paint1_linear_4386_1452" x1="15.3529" y1="17.9792" x2="29.5002" y2="17.9792" gradientUnits="userSpaceOnUse">
-        <stop stop-color="#03FFE5" />
-        <stop offset="1" stop-color="#14B348" />
+        <stop stopColor="#03FFE5" />
+        <stop offset="1" stopColor="#14B348" />
       </linearGradient>
       <linearGradient id="paint2_linear_4386_1452" x1="10.5" y1="15.8319" x2="24.6472" y2="15.8319" gradientUnits="userSpaceOnUse">
-        <stop stop-color="#FCFF1C" />
-        <stop offset="1" stop-color="#FF9D0A" />
+        <stop stopColor="#FCFF1C" />
+        <stop offset="1" stopColor="#FF9D0A" />
       </linearGradient>
     </defs>
   </svg>

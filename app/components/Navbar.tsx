@@ -1,3 +1,5 @@
+"use client"
+import { usePathname } from 'next/navigation';
 import Link from 'next/link';
 import styles from '../styles/navbar.module.css'
 import AnalyticsIcon from './Icons/Analytics';
@@ -10,6 +12,7 @@ import MessageIcon from './Icons/Message';
 import NotificationIcon from './Icons/Notification';
 import RevenueIcon from './Icons/Revenue';
 const Navbar = () => {
+  const pathname = usePathname()
   const navItems = [
     {
       name: 'Home',
@@ -43,7 +46,7 @@ const Navbar = () => {
         <MainstackLogo />
       </div>
       <ul className={styles.nav__actions}>
-        {navItems?.map(navItem => <li key={navItem.path}>
+        {navItems?.map(navItem => <li key={navItem.path} className={pathname === navItem.path ? styles.active__link : ''}>
           <Link href={navItem.path}>
             {navItem.icon}
             {navItem.name}
@@ -64,7 +67,7 @@ const Navbar = () => {
           <MenuIcon />
         </button>
       </div>
-    </div>
+    </div >
   )
 }
 

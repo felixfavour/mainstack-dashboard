@@ -6,16 +6,16 @@ const MediaKitIcon = () => (<svg width="40" height="40" viewBox="0 0 40 40" fill
   </g>
   <defs>
     <linearGradient id="paint0_linear_4386_1458" x1="12.2755" y1="15.1424" x2="23.8365" y2="15.1424" gradientUnits="userSpaceOnUse">
-      <stop stop-color="#FCFF1C" />
-      <stop offset="1" stop-color="#FF9D0A" />
+      <stop stopColor="#FCFF1C" />
+      <stop offset="1" stopColor="#FF9D0A" />
     </linearGradient>
     <linearGradient id="paint1_linear_4386_1458" x1="10" y1="18.0223" x2="20.293" y2="18.0223" gradientUnits="userSpaceOnUse">
-      <stop stop-color="#E7CFFF" />
-      <stop offset="1" stop-color="#870FFF" />
+      <stop stopColor="#E7CFFF" />
+      <stop offset="1" stopColor="#870FFF" />
     </linearGradient>
     <linearGradient id="paint2_linear_4386_1458" x1="10" y1="22.6143" x2="30" y2="22.6143" gradientUnits="userSpaceOnUse">
-      <stop stop-color="#03FFE5" />
-      <stop offset="1" stop-color="#14B348" />
+      <stop stopColor="#03FFE5" />
+      <stop offset="1" stopColor="#14B348" />
     </linearGradient>
   </defs>
 </svg>

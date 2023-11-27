@@ -7,16 +7,16 @@ const InvoicingIcon = () => (
     </g>
     <defs>
       <linearGradient id="paint0_linear_4386_1464" x1="16.2422" y1="21.8522" x2="28.5182" y2="21.8522" gradientUnits="userSpaceOnUse">
-        <stop stop-color="#FCFF1C" />
-        <stop offset="1" stop-color="#FF9D0A" />
+        <stop stopColor="#FCFF1C" />
+        <stop offset="1" stopColor="#FF9D0A" />
       </linearGradient>
       <linearGradient id="paint1_linear_4386_1464" x1="16.2422" y1="20.8857" x2="25.9372" y2="20.8857" gradientUnits="userSpaceOnUse">
-        <stop stop-color="#FFDDCD" />
-        <stop offset="1" stop-color="#FF5403" />
+        <stop stopColor="#FFDDCD" />
+        <stop offset="1" stopColor="#FF5403" />
       </linearGradient>
       <linearGradient id="paint2_linear_4386_1464" x1="11.482" y1="19.7778" x2="25.937" y2="19.7778" gradientUnits="userSpaceOnUse">
-        <stop stop-color="#E7CFFF" />
-        <stop offset="1" stop-color="#870FFF" />
+        <stop stopColor="#E7CFFF" />
+        <stop offset="1" stopColor="#870FFF" />
       </linearGradient>
     </defs>
   </svg>
