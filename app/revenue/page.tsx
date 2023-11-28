@@ -140,14 +140,11 @@ export default function RevenuePage() {
             {/* EMPTY STATE */}
             {filteredTransactions?.length === 0 && !isLoading && <EmptyState />}
 
-            {isLoading ? <Stack>
-              <Skeleton height='60px' />
-              <Skeleton height='60px' />
-              <Skeleton height='60px' />
-              <Skeleton height='60px' />
-              <Skeleton height='60px' />
-              <Skeleton height='60px' />
-            </Stack> : filteredTransactions?.map(transaction => <TransactionTableRow
+            {isLoading ? (
+              <Stack>
+                {[1, 2, 3, 4, 5, 6]?.map(index => <Skeleton key={index} height='60px' borderRadius={8} />)}
+              </Stack>
+            ) : filteredTransactions?.map(transaction => <TransactionTableRow
               key={transaction?.payment_reference || transaction?.amount}
               description={transaction.metadata?.product_name || transaction.metadata?.type || 'Cash Withdrawal'}
               outgoing={transaction.type?.toLowerCase() !== 'deposit'}
