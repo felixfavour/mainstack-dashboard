@@ -1,4 +1,5 @@
 "use client"
+import { Skeleton, Stack } from '@chakra-ui/react'
 import { useEffect, useState } from 'react'
 import BalanceChart from '../components/BalanceChart'
 import EmptyState from '../components/EmptyState'
@@ -12,11 +13,11 @@ import { formatAmount, formatDate } from '../utils/functions'
 
 export default function RevenuePage() {
   const [modalOpen, setModalOpen] = useState(false)
-  const [wallet, setWallet] = useState({})
+  const [wallet, setWallet] = useState<any>({})
   const [isLoading, setIsLoading] = useState(false)
-  const [transactions, setTransactions] = useState([])
+  const [transactions, setTransactions] = useState<Array<any>>([])
   const [activeFilters, setActiveFilters] = useState(0)
-  const [filteredTransactions, setFilteredTransactions] = useState([])
+  const [filteredTransactions, setFilteredTransactions] = useState<Array<any>>([])
   const [filters, setFilters] = useState<any>({})
   const baseURL = 'https://fe-task-api.mainstack.io'
 
@@ -49,7 +50,42 @@ export default function RevenuePage() {
   }, [])
 
   useEffect(() => {
-    setActiveFilters(Object.values(filters)?.filter(val => val?.toString()).length)
+    const activeFilters = Object.values(filters)?.filter(val => val?.toString()).length
+    setActiveFilters(activeFilters)
+    if (transactions?.length > 0) {
+      if (activeFilters > 0) {
+        setIsLoading(true)
+        let tempFilteredTransactions = [...transactions]
+        // FILTER TRANSACTIONS
+        if (
+          filters?.transactionType?.length > 0 ||
+          filters?.transactionStatus?.length > 0 ||
+          filters?.fromDate ||
+          filters?.toDate
+        ) {
+          tempFilteredTransactions = transactions?.filter(trx => {
+            const datetime = new Date(trx.date).getTime()
+
+            return (filters?.transactionType?.length > 0 ? filters?.transactionType.includes(trx.type) : true) &&
+              (filters?.transactionStatus?.length > 0 ? filters?.transactionStatus.includes(trx.status) : true) &&
+              (filters?.toDate ? new Date(filters?.toDate)?.getTime() > datetime : true) &&
+              (filters?.fromDate ? new Date(filters?.fromDate)?.getTime() < datetime : true)
+          })
+        }
+
+        // Mock Network Call
+        setTimeout(() => {
+          setFilteredTransactions(tempFilteredTransactions)
+          setIsLoading(false)
+        }, 1000)
+      } else {
+        setIsLoading(true)
+        setTimeout(() => {
+          setFilteredTransactions(transactions)
+          setIsLoading(false)
+        }, 1000)
+      }
+    }
   }, [filters])
 
   return (
@@ -104,9 +140,15 @@ export default function RevenuePage() {
             {/* EMPTY STATE */}
             {filteredTransactions?.length === 0 && !isLoading && <EmptyState />}
 
-            {/* MAIN TABLE */}
-            {filteredTransactions?.map(transaction => <TransactionTableRow
-              key={transaction.payment_reference}
+            {isLoading ? <Stack>
+              <Skeleton height='60px' />
+              <Skeleton height='60px' />
+              <Skeleton height='60px' />
+              <Skeleton height='60px' />
+              <Skeleton height='60px' />
+              <Skeleton height='60px' />
+            </Stack> : filteredTransactions?.map(transaction => <TransactionTableRow
+              key={transaction?.payment_reference || transaction?.amount}
               description={transaction.metadata?.product_name || transaction.metadata?.type || 'Cash Withdrawal'}
               outgoing={transaction.type?.toLowerCase() !== 'deposit'}
               status={transaction.metadata?.product_name ? transaction.metadata?.name : transaction.status}

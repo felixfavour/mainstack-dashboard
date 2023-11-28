@@ -105,7 +105,7 @@ export default function FilterModal({ modalOpen, setModalOpen, setFilters }: Pro
               <CustomSelect
                 label="Select Transaction Type"
                 value={transactionType}
-                options={['Store Transactions', 'Get Tipped', 'Withdrawals', 'Chargebacks', 'Cashbacks', 'Refer & Earn']}
+                options={['withdrawal', 'deposit']}
                 onChange={(option) => modifyArray('transactionType', option)} />
             </div>
             <div className={styles.form__input}>
