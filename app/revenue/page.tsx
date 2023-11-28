@@ -68,8 +68,8 @@ export default function RevenuePage() {
 
             return (filters?.transactionType?.length > 0 ? filters?.transactionType.includes(trx.type) : true) &&
               (filters?.transactionStatus?.length > 0 ? filters?.transactionStatus.includes(trx.status) : true) &&
-              (filters?.toDate ? new Date(filters?.toDate)?.getTime() > datetime : true) &&
-              (filters?.fromDate ? new Date(filters?.fromDate)?.getTime() < datetime : true)
+              (filters?.toDate ? new Date(filters?.toDate)?.getTime() >= datetime : true) &&
+              (filters?.fromDate ? new Date(filters?.fromDate)?.getTime() <= datetime : true)
           })
         }
 

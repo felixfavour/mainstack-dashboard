@@ -1,6 +1,6 @@
 "use client"
 
-import { Dispatch, SetStateAction, useState } from 'react'
+import { Dispatch, SetStateAction, useEffect, useState } from 'react'
 import styles from '../styles/modal.module.css'
 import CustomDoubleDateRange from './CustomDoubleDateRange'
 import CustomDateRange from './CustomDoubleDateRange'
@@ -19,6 +19,7 @@ export default function FilterModal({ modalOpen, setModalOpen, setFilters }: Pro
   const [transactionType, setTransactionType] = useState<Array<string>>([])
   const [fromDate, setFromDate] = useState('')
   const [toDate, setToDate] = useState('')
+  const [dateRange, setDateRange] = useState(-1)
 
   const delayClose = (milli: number) => {
     setClosingModal(true)
@@ -36,6 +37,16 @@ export default function FilterModal({ modalOpen, setModalOpen, setFilters }: Pro
       transactionType
     })
     delayClose(600)
+  }
+
+  const selectDateRange = (daysDifference: number) => {
+    const todayDate = new Date()
+    const previousDate = new Date()
+    previousDate.setDate(todayDate.getDate() - daysDifference)
+
+    setToDate(todayDate.toDateString())
+    setFromDate(previousDate.toDateString())
+    setDateRange(daysDifference)
   }
 
   const clearFilters = () => {
@@ -79,16 +90,16 @@ export default function FilterModal({ modalOpen, setModalOpen, setFilters }: Pro
             </button>
           </div>
           <div className={styles.chips}>
-            <button className="primary-btn chip">
+            <button className={`primary-btn chip ${dateRange === 0 ? 'active' : ''}`} onClick={() => selectDateRange(0)}>
               Today
             </button>
-            <button className="primary-btn chip">
+            <button className={`primary-btn chip ${dateRange === 7 ? 'active' : ''}`} onClick={() => selectDateRange(7)}>
               Last 7 days
             </button>
-            <button className="primary-btn chip">
+            <button className={`primary-btn chip ${dateRange === 30 ? 'active' : ''}`} onClick={() => selectDateRange(30)}>
               This month
             </button>
-            <button className="primary-btn chip">
+            <button className={`primary-btn chip ${dateRange === 90 ? 'active' : ''}`} onClick={() => selectDateRange(90)}>
               Last 3 months
             </button>
           </div>
@@ -98,7 +109,10 @@ export default function FilterModal({ modalOpen, setModalOpen, setFilters }: Pro
               <CustomDoubleDateRange
                 fromValue={fromDate}
                 toValue={toDate}
-                onChange={(type, date) => { type === 'FROM' ? setFromDate(date) : setToDate(date) }} />
+                onChange={(type, date) => {
+                  type === 'FROM' ? setFromDate(date) : setToDate(date)
+                  setDateRange(-1)
+                }} />
             </div>
             <div className={styles.form__input}>
               <label>Transaction Type</label>

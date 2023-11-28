@@ -27,7 +27,7 @@ export default function CustomDoubleDateRange({ fromValue, toValue, onChange }: 
         peekNextMonth={false}
         value={fromValue}
         selected={fromValue ? new Date(fromValue) : undefined}
-        popperClassName={styles.datepicker__popper}
+        maxDate={new Date()}
         onChange={(date) => onChange('FROM', date ? date.toDateString() : '')}
         renderCustomHeader={({ date, increaseMonth, decreaseMonth }) => (
           <Flex marginBottom={4} justifyContent="space-between">
@@ -56,6 +56,7 @@ export default function CustomDoubleDateRange({ fromValue, toValue, onChange }: 
         value={toValue}
         selected={toValue ? new Date(toValue) : undefined}
         minDate={new Date(fromValue)}
+        maxDate={new Date()}
         onChange={(date) => onChange('TO', date ? date.toDateString() : '')}
         renderCustomHeader={({ date, increaseMonth, decreaseMonth }) => (
           <Flex marginBottom={4} justifyContent="space-between">
