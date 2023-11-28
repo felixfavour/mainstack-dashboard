@@ -1,5 +1,5 @@
 .section {
-  padding: 150px 0;
+  padding: 120px 0;
   width: 100%;
   display: flex;
   justify-content: center;
@@ -48,7 +48,7 @@
 }
 .row_one__revenue .rhs {
   flex-basis: 30%;
-  padding-top: 1rem;
+  padding-top: 3rem;
 }
 
 .metric__card {

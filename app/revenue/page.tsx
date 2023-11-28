@@ -15,6 +15,7 @@ export default function RevenuePage() {
   const [modalOpen, setModalOpen] = useState(false)
   const [wallet, setWallet] = useState<any>({})
   const [isLoading, setIsLoading] = useState(false)
+  const [transactionsLoading, setTransactionsLoading] = useState(false)
   const [transactions, setTransactions] = useState<Array<any>>([])
   const [activeFilters, setActiveFilters] = useState(0)
   const [filteredTransactions, setFilteredTransactions] = useState<Array<any>>([])
@@ -33,13 +34,20 @@ export default function RevenuePage() {
 
   const getTransactions = async () => {
     try {
+      setTransactionsLoading(true)
       const response = await fetch(`${baseURL}/transactions`)
       const transactions = await response.json()
       setTransactions(transactions)
       setFilteredTransactions(transactions)
     } catch (err) {
       console.log('err', err)
+    } finally {
+      setTransactionsLoading(false)
     }
+  }
+
+  const clearFilters = () => {
+    setFilters({})
   }
 
   useEffect(() => {
@@ -54,7 +62,7 @@ export default function RevenuePage() {
     setActiveFilters(activeFilters)
     if (transactions?.length > 0) {
       if (activeFilters > 0) {
-        setIsLoading(true)
+        setTransactionsLoading(true)
         let tempFilteredTransactions = [...transactions]
         // FILTER TRANSACTIONS
         if (
@@ -76,13 +84,13 @@ export default function RevenuePage() {
         // Mock Network Call
         setTimeout(() => {
           setFilteredTransactions(tempFilteredTransactions)
-          setIsLoading(false)
+          setTransactionsLoading(false)
         }, 1000)
       } else {
-        setIsLoading(true)
+        setTransactionsLoading(true)
         setTimeout(() => {
           setFilteredTransactions(transactions)
-          setIsLoading(false)
+          setTransactionsLoading(false)
         }, 1000)
       }
     }
@@ -109,7 +117,7 @@ export default function RevenuePage() {
               </div>
             </div>
             {/* AVAIL BALANCE CHART */}
-            <BalanceChart />
+            <BalanceChart data={transactions} />
           </div>
           <div className={styles.rhs}>
             <MetricCard label="Ledger Balance" value={formatAmount(wallet?.ledger_balance)} info="This is the available ledger balance" isLoading={isLoading} />
@@ -143,9 +151,9 @@ export default function RevenuePage() {
           {/* TRANSACTIONS TABLE */}
           <div className={`${styles.transaction__table} come-up`}>
             {/* EMPTY STATE */}
-            {filteredTransactions?.length === 0 && !isLoading && <EmptyState />}
+            {filteredTransactions?.length === 0 && !transactionsLoading && <EmptyState clearFilters={clearFilters} />}
 
-            {isLoading ? (
+            {transactionsLoading ? (
               <Stack>
                 {[1, 2, 3, 4, 5, 6]?.map(index => <Skeleton key={index} height='60px' borderRadius={8} />)}
               </Stack>

@@ -7,21 +7,23 @@ import ReceiptIcon from './Icons/Receipt'
 
 interface Props {
   header?: string,
-  sub?: string
+  sub?: string,
+  clearFilters: () => void
 }
 
 export default function EmptyState({
   header = "No matching transaction found for the selected filter",
-  sub = "Change your filters to see more results, or add a new product."
+  sub = "Change your filters to see more results, or add a new product.",
+  clearFilters
 }: Props) {
   return (
-    <div className={styles.empty__state}>
+    <div className={`${styles.empty__state} come-up`}>
       <ReceiptIcon />
       <div>
         <h3>{header}</h3>
         <p>{sub}</p>
       </div>
-      <button className="secondary-btn">
+      <button className="secondary-btn" onClick={() => clearFilters()}>
         Clear Filter
       </button>
     </div>

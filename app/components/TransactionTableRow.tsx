@@ -14,7 +14,7 @@ interface Props {
 
 export default function TransactionTableRow({ description, status, outgoing, amount, date }: Props) {
   return (
-    <div className={styles.table_row__transaction}>
+    <div className={`${styles.table_row__transaction} come-up`}>
       <div className={styles.lhs}>
         <div>
           <SideArrowIcon outgoing={outgoing} />
