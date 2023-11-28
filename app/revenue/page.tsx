@@ -1,5 +1,5 @@
 "use client"
-import { Skeleton, Stack } from '@chakra-ui/react'
+import { Skeleton, Stack, Tooltip } from '@chakra-ui/react'
 import { useEffect, useState } from 'react'
 import BalanceChart from '../components/BalanceChart'
 import EmptyState from '../components/EmptyState'
@@ -94,33 +94,36 @@ export default function RevenuePage() {
         <div className={styles.row_one__revenue}>
           <div className={styles.lhs}>
             {/* AVAIL BALANCE HEADER */}
-            <div className={styles.avail__bal}>
+            <div className={`come-up ${styles.avail__bal}`}>
               <div>
                 <p>Available Balance</p>
-                <h2>{formatAmount(wallet?.balance)}</h2>
+                {isLoading ? <Skeleton height='50px' marginTop={4} borderRadius={8} /> :
+                  <h2 className={isLoading ? 'invisible' : 'come-up'}>{formatAmount(wallet?.balance)}</h2>}
               </div>
               <div>
-                <button className="primary-btn">
-                  Withdraw
-                </button>
+                <Tooltip label="Feature awaiting hire ;)" top={-1} hasArrow placement="top" borderRadius={8} background="#131316">
+                  <button className="primary-btn">
+                    Withdraw
+                  </button>
+                </Tooltip>
               </div>
             </div>
             {/* AVAIL BALANCE CHART */}
             <BalanceChart />
           </div>
           <div className={styles.rhs}>
-            <MetricCard label="Ledger Balance" value={formatAmount(wallet?.ledger_balance)} info="This is the available ledger balance" />
-            <MetricCard label="Total Payout" value={formatAmount(wallet?.total_payout)} info="This is the total payout" />
-            <MetricCard label="Total Revenue" value={formatAmount(wallet?.total_revenue)} info="This is the total revenue" />
-            <MetricCard label="Pending Payout" value={formatAmount(wallet?.pending_payout)} info="This is the Pending Payout" />
+            <MetricCard label="Ledger Balance" value={formatAmount(wallet?.ledger_balance)} info="This is the available ledger balance" isLoading={isLoading} />
+            <MetricCard label="Total Payout" value={formatAmount(wallet?.total_payout)} info="This is the total payout" isLoading={isLoading} />
+            <MetricCard label="Total Revenue" value={formatAmount(wallet?.total_revenue)} info="This is the total revenue" isLoading={isLoading} />
+            <MetricCard label="Pending Payout" value={formatAmount(wallet?.pending_payout)} info="This is the Pending Payout" isLoading={isLoading} />
           </div>
         </div>
 
         <div className={styles.row_two__revenue}>
-          <div className={styles.header}>
+          <div className={`${styles.header} come-up`}>
             <div>
               <h3>{filteredTransactions?.length} Transactions</h3>
-              <p>Your transactions for the last 7 days</p>
+              <p>Your transactions for all time</p>
             </div>
             <div className={styles.actions}>
               <div>
@@ -129,14 +132,16 @@ export default function RevenuePage() {
                 </button>
               </div>
               <div>
-                <button className="secondary-btn">
-                  Export list <ExportIcon />
-                </button>
+                <Tooltip label="Feature awaiting hire ;)" top={-1} hasArrow placement="top" borderRadius={8} background="#131316">
+                  <button className="secondary-btn">
+                    Export list <ExportIcon />
+                  </button>
+                </Tooltip>
               </div>
             </div>
           </div>
           {/* TRANSACTIONS TABLE */}
-          <div className={styles.transaction__table}>
+          <div className={`${styles.transaction__table} come-up`}>
             {/* EMPTY STATE */}
             {filteredTransactions?.length === 0 && !isLoading && <EmptyState />}
 

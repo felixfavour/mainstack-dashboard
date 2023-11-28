@@ -6,7 +6,7 @@ import { Line } from 'react-chartjs-2';
 export default function BalanceChart() {
   Chart.register(CategoryScale, LinearScale, PointElement, LineElement);
   return (
-    <div>
+    <div className='come-up'>
       <Line
         datasetIdKey='id'
         options={{
@@ -36,7 +36,6 @@ export default function BalanceChart() {
             label: 'My First Dataset',
             data: [0, 50, 25, 55, 0],
             fill: false,
-            borderColor: 'rgb(75, 192, 192)',
             tension: 0.5,
             borderColor: "#FF5403",
             borderWidth: 1

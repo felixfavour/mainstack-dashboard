@@ -24,6 +24,9 @@
   gap: 5rem;
   margin-bottom: 2rem;
 }
+.avail__bal > div {
+  min-width: 220px;
+}
 .avail__bal p {
   letter-spacing: -0.2px;
   color: var(--grey-text);
