@@ -17,10 +17,10 @@ interface Props {
 export default function CustomSelect({ label, value, options, onChange }: Props) {
   return (
     <div className={styles.custom_select__ctn} onSubmit={(e) => e.preventDefault()}>
-      <button className={styles.select__bar}>
+      <div className={styles.select__bar} onClick={(event) => event.currentTarget.focus()}>
         <span>{value?.toString()?.replaceAll(',', ', ') || label}</span>
         <ChevronDownIcon />
-      </button>
+      </div>
       <div className={styles.options}>
         {options?.map(option => <button
           key={option}
