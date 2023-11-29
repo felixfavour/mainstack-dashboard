@@ -143,6 +143,16 @@
   text-overflow: ellipsis;
   overflow: hidden;
 }
+.custom_select__ctn .select__bar:focus + .options,
+.custom_select__ctn .options:hover {
+  opacity: 1;
+  transform: scale(1);
+  visibility: visible;
+  -webkit-transform: scale(1);
+  -moz-transform: scale(1);
+  -ms-transform: scale(1);
+  -o-transform: scale(1);
+}
 .custom_select__ctn .options {
   border-radius: 12px;
   background: #fff;
@@ -166,16 +176,6 @@
   -moz-transform: scale(0.8);
   -ms-transform: scale(0.8);
   -o-transform: scale(0.8);
-}
-.custom_select__ctn .select__bar:focus + .options,
-.custom_select__ctn .options:hover {
-  opacity: 1;
-  transform: scale(1);
-  visibility: visible;
-  -webkit-transform: scale(1);
-  -moz-transform: scale(1);
-  -ms-transform: scale(1);
-  -o-transform: scale(1);
 }
 .custom_select__ctn .options button {
   height: 50px;
@@ -237,9 +237,32 @@
   width: 100%;
   justify-content: space-between;
 }
-
-.custom_select__ctn .select__bar:focus + .datepicker__popper,
-.custom_select__ctn .datepicker__popper:hover {
+.custom__date_picker .date__bar {
+  border-radius: 12px;
+  background: var(--grey);
+  border: 3px solid var(--grey);
+  height: 50px;
+  width: 100%;
+  padding: 0 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  cursor: pointer;
+}
+.custom__date_picker .date__bar:focus {
+  border-color: var(--dark);
+  background: #ffffff;
+}
+.date__bar span {
+  font-size: 0.875rem;
+  text-transform: capitalize;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+.custom__date_picker .date__bar:focus + .options,
+.custom_select__ctn .options:hover {
   opacity: 1;
   transform: scale(1);
   visibility: visible;

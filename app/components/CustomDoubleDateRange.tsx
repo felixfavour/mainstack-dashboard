@@ -43,7 +43,7 @@ export default function CustomDoubleDateRange({ fromValue, toValue, onChange }: 
           </Flex>
         )}
         customInput={(
-          <button className={styles.select__bar}>
+          <button className={`${styles.date__bar}`}>
             <span>{fromValue?.substring(4) || 'From Date'}</span>
             <div className={styles.icon}>
               <ChevronDownIcon />
@@ -72,7 +72,7 @@ export default function CustomDoubleDateRange({ fromValue, toValue, onChange }: 
           </Flex>
         )}
         customInput={(
-          <button className={styles.select__bar}>
+          <button className={`${styles.date__bar}`}>
             <span>{toValue?.substring(4) || 'To Date'}</span>
             <div className={styles.icon}>
               <ChevronDownIcon />
