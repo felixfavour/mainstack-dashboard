@@ -40,7 +40,7 @@ const Navbar = () => {
     },
     {
       name: 'Apps',
-      path: '/apps',
+      path: '#',
       icon: <AppsIcon />
     }
   ]
