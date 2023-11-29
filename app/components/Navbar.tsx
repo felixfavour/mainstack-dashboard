@@ -15,7 +15,7 @@ import { useEffect, useState } from 'react';
 import { Tooltip } from '@chakra-ui/react';
 const Navbar = () => {
   const pathname = usePathname()
-  const [user, setUser] = useState({})
+  const [user, setUser] = useState<any>({})
   const [isLoading, setIsLoading] = useState(false)
   const navItems = [
     {
@@ -68,12 +68,16 @@ const Navbar = () => {
         <MainstackLogo />
       </div>
       <ul className={styles.nav__actions}>
-        {navItems?.map(navItem => <li key={navItem.path} className={pathname === navItem.path ? styles.active__link : ''}>
-          <Link href={navItem.path}>
-            {navItem.icon}
-            {navItem.name}
-          </Link>
-        </li>)}
+        {navItems?.map(navItem =>
+          <li
+            data-testid="link-list"
+            key={navItem.path}
+            className={pathname === navItem.path ? styles.active__link : ''}>
+            <Link href={navItem.path}>
+              {navItem.icon}
+              {navItem.name}
+            </Link>
+          </li>)}
       </ul>
       <div className={styles.nav_auth__actions}>
         <button>

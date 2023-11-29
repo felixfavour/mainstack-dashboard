@@ -133,11 +133,13 @@ export default function FilterModal({ modalOpen, setModalOpen, setFilters }: Pro
           </form>
           <div className={styles.bottom__actions}>
             <button
+              data-testid="clear-filter-btn"
               className='primary-btn outline'
               onClick={() => clearFilters()}>
               Clear
             </button>
             <button
+              data-testid="apply-filter-btn"
               className='primary-btn'
               disabled={!(transactionType.toString() || transactionStatus.toString() || toDate || fromDate)}
               onClick={() => applyFilters()}>
